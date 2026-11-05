@@ -1,14 +1,14 @@
 // ============================================================
-//  STEP 1: Firebase Console > Project settings > Your apps > Web app
-//  se jo config milay woh yahan paste karen (yeh secret nahi hota).
+// Firebase Configuration
+// Yeh config .env file se aati hai ya neeche default values se.
 // ============================================================
 export const firebaseConfig = {
-  apiKey: "PASTE_API_KEY",
-  authDomain: "PASTE_PROJECT.firebaseapp.com",
-  projectId: "PASTE_PROJECT_ID",
-  storageBucket: "PASTE_PROJECT.appspot.com",
-  messagingSenderId: "PASTE_SENDER_ID",
-  appId: "PASTE_APP_ID",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyA7TTWhAQoVV9acRkqydVi4ENe5n5AbeH8",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "kiryana-qr-menu.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "kiryana-qr-menu",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "kiryana-qr-menu.firebasestorage.app",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "600684523171",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:600684523171:web:895f7330f8a29031c15916",
 };
 
-export const isFirebaseConfigured = !firebaseConfig.apiKey.startsWith("PASTE");
+export const isFirebaseConfigured = !firebaseConfig.apiKey.startsWith("PASTE") && firebaseConfig.apiKey.length > 5;

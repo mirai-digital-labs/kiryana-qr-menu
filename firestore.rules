@@ -8,7 +8,7 @@ service cloud.firestore {
     // ====================================================================
     function isAdmin() {
       return request.auth != null
-          && request.auth.token.email in ['PASTE_ADMIN_EMAIL_HERE'];
+          && request.auth.token.email in ['miraidigitallabs@gmail.com'];
     }
 
     match /products/{id}   { allow read: if true; allow write: if isAdmin(); }

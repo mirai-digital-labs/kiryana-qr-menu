@@ -5,7 +5,7 @@ import type { StoreSettings } from "../types";
 export const DEFAULT_SETTINGS: StoreSettings = {
   nameUr: "میرا کریانہ اسٹور",
   nameEn: "My Kiryana Store",
-  whatsapp: "923001234567", // country code ke saath, bagair + ke
+  whatsapp: "923116506833", // country code ke saath, bagair + ke
   isOpen: true,
   deliveryFee: 50,
   minOrder: 300,
