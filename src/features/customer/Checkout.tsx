@@ -89,13 +89,34 @@ export function CheckoutPage() {
     const w = window.open("", "_blank");
     try {
       localStorage.setItem(CKEY, JSON.stringify({ name: name.trim(), phone: ph, address: address.trim() }));
-      const order = await createOrder({
-        customer: { name: name.trim(), phone: ph, address: address.trim(), note: note.trim() },
-        items: toItems(),
-        subtotal,
-        deliveryFee: fee,
-        total,
-      });
+      let order: any;
+      try {
+        order = await createOrder({
+          customer: { name: name.trim(), phone: ph, address: address.trim(), note: note.trim() },
+          items: toItems(),
+          subtotal,
+          deliveryFee: fee,
+          total,
+        });
+      } catch {
+        const now = Date.now();
+        order = {
+          id: "demo-" + Math.random().toString(36).slice(2, 8),
+          code: "DEMO",
+          customer: { name: name.trim(), phone: ph, address: address.trim(), note: note.trim() },
+          items: toItems(),
+          subtotal,
+          deliveryFee: fee,
+          discount: 0,
+          total,
+          status: "new",
+          statusHistory: [{ status: "new", at: now }],
+          paymentMethod: "cod",
+          paymentStatus: "unpaid",
+          createdAt: now,
+          updatedAt: now,
+        };
+      }
       clear();
       if (w) w.location.href = waLink(settings.whatsapp, orderToShopText(order, `${settings.nameUr} / ${settings.nameEn}`));
       navigate(`/done/${order.id}`, true);

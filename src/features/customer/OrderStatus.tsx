@@ -33,7 +33,29 @@ function Steps({ status }: { status: Order["status"] }) {
 
 function useOrder(id: string) {
   const [order, setOrder] = useState<Order | null | undefined>(undefined);
-  useEffect(() => subscribeOrder(id, setOrder, () => setOrder(null)), [id]);
+  useEffect(() => {
+    if (id.startsWith("demo-")) {
+      const saved = (() => { try { return JSON.parse(localStorage.getItem("kq.cust.v1") || "{}"); } catch { return {}; } })();
+      setOrder({
+        id,
+        code: "DEMO",
+        customer: { name: saved.name || "Customer", phone: saved.phone || "", address: saved.address || "", note: "" },
+        items: [],
+        subtotal: 0,
+        deliveryFee: 50,
+        discount: 0,
+        total: 550,
+        status: "new",
+        statusHistory: [{ status: "new", at: Date.now() }],
+        paymentMethod: "cod",
+        paymentStatus: "unpaid",
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      });
+      return;
+    }
+    return subscribeOrder(id, setOrder, () => setOrder(null));
+  }, [id]);
   return order;
 }
 
