@@ -1,0 +1,28 @@
+{
+  "name": "kiryana-qr-menu",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "deploy": "vite build && npx wrangler pages deploy dist --project-name kiryana-menu",
+    "deploy:rules": "npx firebase-tools deploy --only firestore:rules"
+  },
+  "dependencies": {
+    "firebase": "^10.14.1",
+    "qrcode": "^1.5.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.8"
+  }
+}
